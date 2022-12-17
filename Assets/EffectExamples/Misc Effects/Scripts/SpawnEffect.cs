@@ -8,39 +8,60 @@ public class SpawnEffect : MonoBehaviour {
     public float pause = 1;
     public AnimationCurve fadeIn;
 
-    ParticleSystem ps;
+    public ParticleSystem ps;
     float timer = 0;
     Renderer _renderer;
 
     int shaderProperty;
 
-	void Start ()
+    public bool teleport = false;
+    public bool teleported = false;
+
+
+    void Start ()
     {
         shaderProperty = Shader.PropertyToID("_cutoff");
         _renderer = GetComponent<Renderer>();
-        ps = GetComponentInChildren <ParticleSystem>();
 
         var main = ps.main;
         main.duration = spawnEffectTime;
-
-        ps.Play();
-
     }
 	
 	void Update ()
     {
+        Teleport();
+
         if (timer < spawnEffectTime + pause)
         {
             timer += Time.deltaTime;
         }
         else
         {
-            ps.Play();
             timer = 0;
+            if (!teleported) 
+            {
+                DisableTp();
+                teleported = true;
+            }
         }
 
 
         _renderer.material.SetFloat(shaderProperty, fadeIn.Evaluate( Mathf.InverseLerp(0, spawnEffectTime, timer)));
         
+    }
+
+    private void Teleport()
+    {
+        if (teleport)
+        {
+            ps.Play();
+            teleport = false;
+            teleported = false;
+        }
+    }
+
+    public void DisableTp()
+    {
+        GetComponent<TeleportPlayerScript>().DisableTp();
     }
 }
