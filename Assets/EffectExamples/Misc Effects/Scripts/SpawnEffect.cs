@@ -15,7 +15,7 @@ public class SpawnEffect : MonoBehaviour {
     int shaderProperty;
 
     public bool teleport = false;
-    public bool teleported = false;
+    public bool teleported = true;
 
 
     void Start ()
@@ -38,13 +38,13 @@ public class SpawnEffect : MonoBehaviour {
         else
         {
             timer = 0;
-            if (!teleported) 
+            if (teleported) 
             {
                 DisableTp();
                 teleported = true;
             }
         }
-
+        Debug.Log(teleported);
 
         _renderer.material.SetFloat(shaderProperty, fadeIn.Evaluate( Mathf.InverseLerp(0, spawnEffectTime, timer)));
         

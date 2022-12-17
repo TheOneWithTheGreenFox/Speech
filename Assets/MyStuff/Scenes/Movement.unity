@@ -17634,8 +17634,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2583869669874723848}
-  rightHand: {fileID: 0}
-  leftHand: {fileID: 0}
+  rightHand: {fileID: 7835694081261057768}
+  leftHand: {fileID: 8658796922864423192}
   fireballPrefab: {fileID: 1958894317660741930, guid: 7bfb18811b03e7147ae9ad28679f665d,
     type: 3}
   fireballSpeed: 5
